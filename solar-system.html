@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <link href="img/skywalkerico96.png" type="image/x-icon" rel="shortcut icon"></link>
+        <link href="css/style.css" type="text/css" rel="stylesheet"></link>
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script type="text/javascript" src="js/bodyDraw.js"></script>
+        <script type="text/javascript" src="js/maths.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+        <script type="text/javascript" src="js/shaders.js"></script>
+        <script type="text/javascript" src="js/sphere.js"></script>
+        <script type="text/javascript" src="js/stack.js"></script>
+        <script type="text/javascript" src="js/texture.js"></script>
+        <script type="text/javascript" src="js/webgl-utils.js"></script>
+        <script type="text/javascript" src="js/events.js"></script>
+        <script type="text/javascript" src="data.json"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- TITLE -->
+        <title>Solar System</title>
+
+    </head>
+
+    <body onload="runWebGL()">
+        <canvas id="space"></canvas>
+
+        <a href="index.html"><img
+            id="logo"
+            src="img/spaceman.png"
+            style="top: 1%; left: 1%; position: absolute; width:250px"></a>
+        <div
+            id="help-div"
+            class="container"
+            style="top: 0; left: 80%; position: absolute; width: 20%; height: 50%;text-align: center">
+            <img id="panel" src="img/panel.png" style="width:130px;">
+            <p id="fps" style="color:white;">
+                FPS:
+            </p>
+            <div
+                style="height: 100%; text-align: center; background-color: rgba(0, 0, 0, 0.75); border-radius:50px; ">
+                <div style="height: 100%; overflow: auto;">
+                    <button
+                        id="pause"
+                        type="button"
+                        class="btn btn-primary"
+                        style="border-radius: 50px; outline: none;margin-top: 10px;">
+                        <img
+                            id="pauseImg"
+                            src="img/pause.png"
+                            style="float:left;width: 25px; padding-right:10px;">
+                        <span id="spanPause" style="font-weight: bold;">Pause</span>
+                    </button>
+					<br><br>
+                    <button
+                        id="keys"
+                        type="button"
+                        class="btn btn-info"
+                        data-toggle="collapse"
+                        data-target="#instructions"
+                        style="border-radius: 50px; outline: none;">
+                        <img
+                            id="keysImg"
+                            src="img/keys.png"
+                            style="float:left;width: 20px; padding-right:5px;">
+                        <span id="spanKeys" style="font-weight: bold;">Show keyboard shortcuts</span>
+                    </button>
+                    <div id="instructions" class="collapse" style="color:white">
+                        <div style="background-color: rgba(200, 150, 24, 0.1)">
+                            <br>
+                            <b>Drag Mouse:</b>
+                            Rotate Camera (Orbit)
+                            <br>
+                            <b>⇧Shift + Drag Mouse:</b>
+                            Move System (Pan)
+                            <br>
+                            <b>Mouse Wheel (Scroll):</b>
+                            Zoom In/Out
+                            <br>
+                            <b>Enter:</b>
+                            Follow next Planet
+                            <br>
+                            <b>CTRL:</b>
+                            Pause System
+                        </div>
+                        <br>
+                    </div>
+                    <br><br>
+                    <form>
+                        <label for="bodies" style="color:white;padding-right:10px">Choose a planet:
+                        </label>
+                        <select name="bodies" id="bodies"></select>
+                    </form>
+                    <br>
+                    <button
+                        id="follow"
+                        type="button"
+                        class="btn btn-success"
+                        style="border-radius: 50px; outline: none;">
+                        <img
+                            id="followImg"
+                            src="img/follow.png"
+                            style="float:left;width: 55px; padding-right:10px;">
+                        <span id="spanFollow" style="font-weight: bold;">Follow</span>
+                    </button>
+                    <br><br>
+                    <button
+                        id="delete"
+                        type="button"
+                        class="btn btn-danger"
+                        style="border-radius: 50px; outline: none;">
+                        <img
+                            id="deleteImg"
+                            src="img/delete.png"
+                            style="float:left;width: 30px; padding-right:10px;">
+                        <span id="spanDelete" style="font-weight: bold;">Delete Planet</span>
+                    </button>
+                    <br><br>
+                    <button
+                        id="load"
+                        type="button"
+                        class="btn btn-warning"
+                        style="border-radius: 50px; outline: none;">
+                        <img
+                            id="loadImg"
+                            src="img/load.png"
+                            style="float:left;width: 30px; padding-right:10px;">
+                        <span id="spanLoad" style="font-weight: bold;">Load System</span>
+                    </button>
+                    <br><br>
+                    <button
+                        id="reset"
+                        type="button"
+                        class="btn btn-info"
+						onclick="resetCanvas()"
+                        style="border-radius: 50px; outline: none;">
+                        <img
+                            id="pauseImg"
+                            src="img/reset.png"
+                            style="float:left;width: 30px; padding-right:10px;">
+                        <span id="spanReset" style="font-weight: bold;">Reset</span>
+                    </button>
+                    <br><br>
+                    <div>
+                        <center>
+                            <br>
+                            <h4 style="color:#fe4945; font-weight:bold;">Options</h4>
+							
+							<table>
+								<tr>
+									<th>
+										<img
+										id="2dImg"
+										src="img/2d.png"
+										style="width: 45px; padding-right:10px;">
+									</th>
+									<th>
+										<label class="switch">
+											<input type="checkbox" checked id = "3d">
+											<div class="slider"></div>
+										</label>
+									</th>
+									<th>
+									<img
+										id="2dImg"
+										src="img/3d.png"
+										style="width: 55px; padding-left:10px;">
+									</th>
+								</tr>
+							</table>
+							<table>
+								<tr>
+									<th>
+										<img
+										id="2dImg"
+										src="img/wireframe.png"
+										style="width: 40px; padding-right:5px;">
+									</th>
+									<th>
+										<label class="switch">
+											<input type="checkbox" checked id = "wireframe">
+											<div class="slider"></div>
+										</label>
+									</th>
+									<th>
+									<img
+										id="2dImg"
+										src="img/triangles.png"
+										style="width: 45px; padding-left:10px;">
+									</th>
+								</tr>
+							</table>
+
+							<br><br>
+                            <p style="color:white; display:inline">Time:</p>
+                            <input type="number" id="time-scale" style="width:5em" value="50">
+                            (
+                            <button class="btn" id="minus-time" onclick="slower()">-</button>
+                            <button class="btn" id="plus-time" onclick="faster()">+</button>
+                            )
+                            <br><br>
+                            <p style="color:white; display:inline">Cam Depth:</p>
+                            <input type="number" id="cam-depth" style="width:5em" value="100">
+                            (
+                            <button class="btn" id="minus-cam" onclick="zoomIn()">-</button>
+                            <button class="btn" id="plus-cam" onclick="zoomOut()">+</button>
+                            )
+                            <br><br>
+                            <p style="color:white; display:inline">Draw Dist:</p>
+                            <input type="number" id="draw-dist" style="width:5em" value="1000">
+                            (
+                            <button class="btn" id="minus-dist">-</button>
+                            <button class="btn" id="plus-dist">+</button>
+                            )
+
+                        </center>
+                    </div>
+                    <br>
+                    <div>
+                        <center>
+                            <br>
+                            <h4 style="color:#6de46d; font-weight:bold;">Add New Planet</h4>
+							<p style="color:white; display:inline">Name:</p>
+                            <input type="text" id="name" style="width:5em" value="Pandora">
+                            <br><br>
+                            <p style="color:white; display:inline">Distance:</p>
+                            <input type="number" id="distance" style="width:5em" value="32">
+                            <br><br>
+                            <p style="color:white; display:inline">Translation Velocity:</p>
+                            <input type="number" id="translation" style="width:5em" value="0.01">
+                            <br><br>
+                            <p style="color:white; display:inline">Rotation Velocity:</p>
+                            <input type="number" id="rotation" style="width:5em" value="0.005">
+                            <br><br>
+                            <p style="color:white; display:inline">Radius:</p>
+                            <input type="number" id="radius" style="width:5em" value="6.37">
+                            <br><br>
+                            <p style="color:white; display:inline">Texture:</p>
+                            <input type="text" id="texture" style="width:5em" value="pandora.jpg">
+                            <br><br>
+                            <button
+                                id="add"
+                                type="button"
+                                class="btn btn-success"
+                                style="border-radius: 50px; outline: none;">
+                                <img
+                                    id="addImg"
+                                    src="img/add.png"
+                                    style="float:left;width: 30px; padding-right:10px;">
+                                <span id="spanAdd" style="font-weight: bold;">Add Planet</span>
+                            </button>
+                            <br><br>
+                        </center>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <!--<div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1"> <div
+            class="u-layout"> <div class="u-layout-row" > <div class="u-container-style
+            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup" onclick="sunClick">
+            <div class="u-container-layout u-container-layout-4"> <img
+            src="img/planets/sun.png" alt="" class="u-image u-image-default
+            u-preserve-proportions u-image-1" data-image-width="200"
+            data-image-height="200"> </div> </div> <div class="u-container-style
+            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup"
+            onclick="mercuryClick"> <div class="u-container-layout u-container-layout-4">
+            <img src="img/planets/mercury.png" alt="" class="u-image u-image-default
+            u-preserve-proportions u-image-1" data-image-width="200"
+            data-image-height="200"> </div> </div> <div class="u-container-style
+            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup"
+            onclick="vennusClick"> <div class="u-container-layout u-container-layout-4">
+            <img src="img/planets/venus.png" alt="" class="u-image u-image-default
+            u-preserve-proportions u-image-1" data-image-width="200"
+            data-image-height="200"> </div> </div> <div class="u-container-style
+            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup" onclick="earthClick">
+            <div class="u-container-layout u-container-layout-4"> <img
+            src="img/planets/earth.png" alt="" class="u-image u-image-default
+            u-preserve-proportions u-image-1" data-image-width="200"
+            data-image-height="200"> </div> </div> <div class="u-container-style
+            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup" onclick="marsClick">
+            <div class="u-container-layout u-container-layout-4"> <img
+            src="img/planets/mars.png" alt="" class="u-image u-image-default
+            u-preserve-proportions u-image-1" data-image-width="200"
+            data-image-height="200"> </div> </div> <div class="u-container-style
+            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup"
+            onclick="jupiterClick"> <div class="u-container-layout u-container-layout-4">
+            <img src="img/planets/jupiter.png" alt="" class="u-image u-image-default
+            u-preserve-proportions u-image-1" data-image-width="200"
+            data-image-height="200"> </div> </div> <div class="u-container-style
+            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup"
+            onclick="saturnClick"> <div class="u-container-layout u-container-layout-4">
+            <img src="img/planets/saturn.png" alt="" class="u-image u-image-default
+            u-preserve-proportions u-image-1" data-image-width="200"
+            data-image-height="200"> </div> </div> <div class="u-container-style
+            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup"
+            onclick="uranusClick"> <div class="u-container-layout u-container-layout-4">
+            <img src="img/planets/uranus.png" alt="" class="u-image u-image-default
+            u-preserve-proportions u-image-1" data-image-width="200"
+            data-image-height="200"> </div> </div> <div class="u-container-style
+            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup"
+            onclick="neptuneClick"> <div class="u-container-layout u-container-layout-4">
+            <img src="img/planets/neptune.png" alt="" class="u-image u-image-default
+            u-preserve-proportions u-image-1" data-image-width="200"
+            data-image-height="200"> </div> </div> </div> </div> </div>-->
+
+        </body>
+    </html>
