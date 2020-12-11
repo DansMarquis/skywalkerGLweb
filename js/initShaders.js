@@ -13,6 +13,7 @@ var SHADERS = {
     _normal: null,
 
     initialize: function(GL) {
+
         // Vertex Shader
         var shaderVertexSource = "\n\
             attribute vec3 position;\n\
@@ -30,6 +31,7 @@ var SHADERS = {
             vView=vec3(Vmatrix*Mmatrix*vec4(position, 1.));\n\
             vUV=uv;\n\
             }";
+
         // Fragment Shader
         var shaderFragmentSource = "\n\
             precision mediump float;\n\
@@ -39,7 +41,7 @@ var SHADERS = {
             varying vec3 vView;\n\
             const vec3 source_ambient_color=vec3(0.4,0.4,0.4);\n\
             const vec3 source_diffuse_color=vec3(" + redL + "," + greenL + "," + blueL + ");\n\
-            const vec3 source_specular_color=vec3(1.,1.,1.);\n\
+            const vec3 source_specular_color=vec3(0.,0.,0.);\n\
             const vec3 source_direction=vec3(" + xxL + "," + yyL + "," + zzL + ");\n\
             \n\
             const vec3 mat_ambient_color=vec3(0.3,0.3,0.3);\n\
@@ -98,6 +100,5 @@ var SHADERS = {
 
         GL.useProgram(SHADER_PROGRAM);
         GL.uniform1i(SHADERS._sampler, 0); // Texture channel number 0
-        console.log("here");
     }
 };

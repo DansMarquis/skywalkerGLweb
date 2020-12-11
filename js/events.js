@@ -93,6 +93,23 @@ function setEventListeners() {
         updateShader();
     }
 
+    // Load JSON Button
+    document.getElementById("file").onchange = function() {
+        console.log(this.files[0])
+        var file = this.files[0];
+        console.log(file)
+        var reader = new FileReader();
+
+        reader.onload = function(progressEvent) {
+            state = this.result;
+            fileToJSON(this.result);
+            document.getElementById("file").value = null;
+        };
+
+        // File read as a string
+        reader.readAsText(file);
+    }
+
 
     document.body.onkeyup = function(e) {
         // Onclick ENTER Follow next planet
@@ -281,4 +298,28 @@ function plusDraw() {
 // Update Shader
 function updateShader() {
     SHADERS.initialize(GL);
+}
+
+// Load File
+function fileToJSON(state) {
+
+    // Reset Variables
+    var theSelect = document.getElementById('bodies');
+    var options = theSelect.getElementsByTagName('option');
+    for (var i = 0; i < options.length; i++) {
+        theSelect.removeChild(options[i]);
+        i--;
+    }
+
+    bodies = null;
+    bodyModels = [];
+    bodyObjects = [];
+    bodyNames = [];
+    bodyInfo = [];
+    lastIndex = null;
+
+    bodies = JSON.parse(state);
+    console.log(bodies);
+    bodies[0].forEach(initPlanets); // Planets and Stars
+    bodies[1].forEach(initMoons);
 }

@@ -15,13 +15,13 @@
         <script type="text/javascript" src="js/bodyDraw.js"></script>
         <script type="text/javascript" src="js/maths.js"></script>
         <script type="text/javascript" src="js/script.js"></script>
-        <script type="text/javascript" src="js/shaders.js"></script>
+        <script type="text/javascript" src="js/initShaders.js"></script>
         <script type="text/javascript" src="js/sphere.js"></script>
         <script type="text/javascript" src="js/stack.js"></script>
         <script type="text/javascript" src="js/texture.js"></script>
         <script type="text/javascript" src="js/webgl-utils.js"></script>
         <script type="text/javascript" src="js/events.js"></script>
-        <script type="text/javascript" src="data.json"></script>
+        <script type="text/javascript" src="system.json"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -124,17 +124,13 @@
                         <span id="spanDelete" style="font-weight: bold;">Delete Planet</span>
                     </button>
                     <br><br>
-                    <button
-                        id="load"
-                        type="button"
-                        class="btn btn-warning"
-                        style="border-radius: 50px; outline: none;">
-                        <img
+                    <label class="btn btn-warning btn-file" style="border-radius: 50px; outline: none;">
+							 <img
                             id="loadImg"
                             src="img/load.png"
                             style="float:left;width: 30px; padding-right:10px;">
-                        <span id="spanLoad" style="font-weight: bold;">Load System</span>
-                    </button>
+                        <span id="spanLoad" style="font-weight: bold;">Load System</span><input type="file" id="file" name="file" style="display: none;">
+					</label>
                     <br><br>
                     <button
                         id="reset"
@@ -227,7 +223,7 @@
                                 <p style="color:white; font-weight:bold">Y:</p>
                                 <input type="range" min="-2" max="2" value="0" step="0.1" id="yy" class="slider2">
                                 <p style="color:white; font-weight:bold">Z:</p>
-                                <input type="range" min="-2" max="2" value="1" step="0.1" id="zz" class="slider2">
+                                <input type="range" min="-2" max="2" value="1.5" step="0.1" id="zz" class="slider2">
                                 
                         </center>
                     </div>

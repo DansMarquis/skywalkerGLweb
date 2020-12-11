@@ -89,6 +89,7 @@ function initMoons(body) {
 function initBodies() {
 
     planetsForm = document.getElementById("bodies"); // Selection list init
+
     bodies = JSON.parse(data); // Parse JSON
     bodies[0].forEach(initPlanets); // Planets and Stars
     bodies[1].forEach(initMoons); // Moons
@@ -229,7 +230,7 @@ function initWebGL(CANVAS) {
     blueL = 0.8;
     xxL = 0;
     yyL = 0;
-    zzL = 1;
+    zzL = 1.5;
     drawDist = 400;
 }
 
@@ -249,7 +250,7 @@ function runWebGL() {
     blueL = 0.8;
     xxL = 0;
     yyL = 0;
-    zzL = 1;
+    zzL = 1.5;
 
     SHADERS.initialize(GL);
 
@@ -258,4 +259,5 @@ function runWebGL() {
     initBodies();
     setEventListeners();
     tick();
+
 }
