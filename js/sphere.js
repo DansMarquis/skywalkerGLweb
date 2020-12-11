@@ -1,3 +1,8 @@
+/*
+    Authors:
+    - Daniel Marques 85070
+    - Tomás Freitas  84957
+*/
 var SPHERE = {
     getSphereVertex: function(radius, res) { // The vertex, normals and texture coordinates are obtained
         var vertexData = [],

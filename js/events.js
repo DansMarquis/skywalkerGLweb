@@ -1,3 +1,8 @@
+/*
+    Authors:
+    - Daniel Marques 85070
+    - Tomás Freitas  84957
+*/
 function setEventListeners() {
     document.getElementById("pause").onclick = function() {
         pause = !pause;
@@ -150,8 +155,8 @@ function handleMouseMove(event) {
     // Orbit
     else {
         if (!follow) {
-            orbitY += radians(deltaX);
-            orbitX += radians(deltaY);
+            orbitY += radians(deltaX) / 2;
+            orbitX += radians(deltaY) / 2;
         }
 
     }

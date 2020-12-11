@@ -1,3 +1,8 @@
+/*
+    Authors:
+    - Daniel Marques 85070
+    - Tomás Freitas  84957
+*/
 // Context
 var gl = null;
 var CANVAS = null;
@@ -81,7 +86,7 @@ function initBodies() {
 /*========================= TRANSFORMATIONS ========================= */
 function drawTransformations() {
 
-    PROJMATRIX = MATHS.getProjection(45, CANVAS.width / CANVAS.height, 1, 400); // Projection Distance
+    PROJMATRIX = MATHS.getProjection(45, CANVAS.width / CANVAS.height, 1, 400); // Projection matrix (distance)
     MOVEMATRIX = MATHS.getI4(); // Motion matrix
     VIEWMATRIX = MATHS.getI4(); // View matrix
 

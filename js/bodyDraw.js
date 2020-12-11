@@ -1,3 +1,8 @@
+/*
+    Authors:
+    - Daniel Marques 85070
+    - Tomás Freitas  84957
+*/
 function Body(distance, translation, rotation, radius, stoppable) {
     this.vertex = null;
     this.faces = null;

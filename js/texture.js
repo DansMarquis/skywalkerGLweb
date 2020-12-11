@@ -1,7 +1,12 @@
+/*
+    Authors:
+    - Daniel Marques 85070
+    - Tomás Freitas  84957
+*/
 var TEXTURE = {
     getTexture: function(GL, imageURL) {
         var image = new Image();
-        image.crossOrigin = "Use-Credentials";
+        image.crossOrigin = "Anonymous";
         image.src = imageURL;
         image.webglTexture = false;
 
@@ -17,7 +22,8 @@ var TEXTURE = {
             image.webglTexture = texture;
 
         };
-        image.crossOrigin = "Use-Credentials";
+
+        image.crossOrigin = "Anonymous";
         image.src = imageURL;
         image.webglTexture = false;
         return image;
