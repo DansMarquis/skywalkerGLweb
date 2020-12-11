@@ -33,10 +33,17 @@ var bodyNames = [];
 var bodyInfo = [];
 // Last index
 var lastIndex = null;
+// Light Source RGB
+var redL = null;
+var greenL = null;
+var blueL = null;
+var xxL = null;
+var yyL = null;
+var zzL = null;
 // Count FPS (Frames Per Second)
 var elapsedTime = 0;
 var frameCount = 0;
-var lastfpsTime = new Date().getTime();;
+var lastfpsTime = new Date().getTime();
 
 /*========================= COUNT FRAMES ========================= */
 function countFrames() {
@@ -217,6 +224,12 @@ function initWebGL(CANVAS) {
     zoom = -100;
     orbitX = 0.2;
     orbitY = 0.5;
+    redL = 0.8;
+    greenL = 0.8;
+    blueL = 0.8;
+    xxL = 0;
+    yyL = 0;
+    zzL = 1;
     drawDist = 400;
 }
 
@@ -230,6 +243,13 @@ function runWebGL() {
     initWebGL(CANVAS);
 
     GL.viewport(0.0, 0.0, CANVAS.width, CANVAS.height); // Sets the drawing area
+    // Light Source values init
+    redL = 0.8;
+    greenL = 0.8;
+    blueL = 0.8;
+    xxL = 0;
+    yyL = 0;
+    zzL = 1;
 
     SHADERS.initialize(GL);
 

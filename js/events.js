@@ -58,6 +58,42 @@ function setEventListeners() {
         planetsForm.add(option);
     }
 
+    // Sliders Events
+    var redSlider = document.getElementById('red');
+    var greenSlider = document.getElementById('green');
+    var blueSlider = document.getElementById('blue');
+    var xSlider = document.getElementById('xx');
+    var ySlider = document.getElementById('yy');
+    var zSlider = document.getElementById('zz');
+    // RGB
+    redSlider.onchange = function() {
+        redL = redSlider.value;
+        updateShader();
+    }
+    greenSlider.onchange = function() {
+        greenL = greenSlider.value;
+        updateShader();
+    }
+    blueSlider.onchange = function() {
+        blueL = blueSlider.value;
+        updateShader();
+    }
+
+    // XYZ
+    xSlider.onchange = function() {
+        xxL = xSlider.value;
+        updateShader();
+    }
+    ySlider.onchange = function() {
+        yyL = ySlider.value;
+        updateShader();
+    }
+    zSlider.onchange = function() {
+        zzL = zSlider.value;
+        updateShader();
+    }
+
+
     document.body.onkeyup = function(e) {
         // Onclick ENTER Follow next planet
         if (e.keyCode == 13) {
@@ -213,6 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
 // Cam Depth - Zoom In
 function zoomIn() {
 
@@ -239,4 +276,9 @@ function plusDraw() {
 
     var val = parseInt(document.getElementById("draw-dist").value);
     drawDist += val;
+}
+
+// Update Shader
+function updateShader() {
+    SHADERS.initialize(GL);
 }

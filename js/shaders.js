@@ -38,9 +38,9 @@ var SHADERS = {
             varying vec3 vNormal;\n\
             varying vec3 vView;\n\
             const vec3 source_ambient_color=vec3(0.4,0.4,0.4);\n\
-            const vec3 source_diffuse_color=vec3(0.8,0.8,0.8);\n\
+            const vec3 source_diffuse_color=vec3(" + redL + "," + greenL + "," + blueL + ");\n\
             const vec3 source_specular_color=vec3(1.,1.,1.);\n\
-            const vec3 source_direction=vec3(0.,0.,1.);\n\
+            const vec3 source_direction=vec3(" + xxL + "," + yyL + "," + zzL + ");\n\
             \n\
             const vec3 mat_ambient_color=vec3(0.3,0.3,0.3);\n\
             const vec3 mat_diffuse_color=vec3(1.,1.,1.);\n\
@@ -86,11 +86,11 @@ var SHADERS = {
         SHADERS._Pmatrix = GL.getUniformLocation(SHADER_PROGRAM, "Pmatrix"); // Pointer to the projection matrix
         SHADERS._Vmatrix = GL.getUniformLocation(SHADER_PROGRAM, "Vmatrix"); // Pointer to the view matrix
         SHADERS._Mmatrix = GL.getUniformLocation(SHADER_PROGRAM, "Mmatrix"); // Pointer to the model matrix
+
         SHADERS._sampler = GL.getUniformLocation(SHADER_PROGRAM, "sampler");
         SHADERS._uv = GL.getAttribLocation(SHADER_PROGRAM, "uv"); // Pointer to the texture coordinates variable
         SHADERS._position = GL.getAttribLocation(SHADER_PROGRAM, "position"); // Pointer to the position variable
         SHADERS._normal = GL.getAttribLocation(SHADER_PROGRAM, "normal"); // Pointer to the normal coordinates variable
-
 
         GL.enableVertexAttribArray(SHADERS._uv); // Enable uv
         GL.enableVertexAttribArray(SHADERS._position); // Enable position
@@ -98,5 +98,6 @@ var SHADERS = {
 
         GL.useProgram(SHADER_PROGRAM);
         GL.uniform1i(SHADERS._sampler, 0); // Texture channel number 0
+        console.log("here");
     }
 };
