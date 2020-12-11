@@ -175,6 +175,7 @@ function resetCanvas() {
     zoom = -100;
     orbitX = 0.2;
     orbitY = 0.5;
+    drawDist = 400;
     bodyModels.forEach(drawModels);
 
     function drawModels(body, index) {
@@ -211,3 +212,31 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Cam Depth - Zoom In
+function zoomIn() {
+
+    var val = parseInt(document.getElementById("cam-depth").value);
+    zoom += val;
+}
+
+// Cam Depth - Zoom Out
+function zoomOut() {
+
+    var val = parseInt(document.getElementById("cam-depth").value);
+    zoom -= val;
+}
+
+// Draw Dist - Minus Draw Distance
+function minusDraw() {
+
+    var val = parseInt(document.getElementById("draw-dist").value);
+    drawDist -= val;
+}
+
+// Draw Dist - Plus Draw Distance
+function plusDraw() {
+
+    var val = parseInt(document.getElementById("draw-dist").value);
+    drawDist += val;
+}

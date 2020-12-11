@@ -16,17 +16,21 @@ var moveX = null;
 var moveY = null;
 var orbitX = null;
 var orbitY = null;
+var drawDist = null;
 // Controls
 var pause = false;
 var follow = false;
 var perspective3D = true;
 var wireframe = null;
+// JSON PArsed
+var bodies = null;
 // Planet selection list
 var planetsForm = null;
 // Lists
 var bodyModels = [];
 var bodyObjects = [];
 var bodyNames = [];
+var bodyInfo = [];
 // Last index
 var lastIndex = null;
 // Count FPS (Frames Per Second)
@@ -78,7 +82,7 @@ function initMoons(body) {
 function initBodies() {
 
     planetsForm = document.getElementById("bodies"); // Selection list init
-    var bodies = JSON.parse(data); // Parse JSON
+    bodies = JSON.parse(data); // Parse JSON
     bodies[0].forEach(initPlanets); // Planets and Stars
     bodies[1].forEach(initMoons); // Moons
 }
@@ -86,7 +90,7 @@ function initBodies() {
 /*========================= TRANSFORMATIONS ========================= */
 function drawTransformations() {
 
-    PROJMATRIX = MATHS.getProjection(45, CANVAS.width / CANVAS.height, 1, 400); // Projection matrix (distance)
+    PROJMATRIX = MATHS.getProjection(45, CANVAS.width / CANVAS.height, 1, drawDist); // Projection matrix (distance)
     MOVEMATRIX = MATHS.getI4(); // Motion matrix
     VIEWMATRIX = MATHS.getI4(); // View matrix
 
@@ -128,7 +132,24 @@ function animate() {
 
     var timeNow = new Date().getTime();
     var id = parseInt(document.getElementById('bodies').value);
+    document.getElementById('planetName').innerHTML = '' + bodyNames[id];
+    if (bodies[0][id] != null) {
+        document.getElementById('tspeed').innerHTML = '' + bodies[0][id].info.translation;
+        document.getElementById('rspeed').innerHTML = '' + bodies[0][id].info.rotation;
+        document.getElementById('odistance').innerHTML = '' + bodies[0][id].info.distance;
+        document.getElementById('rradius').innerHTML = '' + bodies[0][id].info.diameter;
+        document.getElementById('mass').innerHTML = '' + bodies[0][id].info.mass;
+        document.getElementById("planetImg").src = "img/planets/" + bodies[0][id].info.name + ".png";
+    } else {
+        document.getElementById('tspeed').innerHTML = '0.0';
+        document.getElementById('rspeed').innerHTML = '0.0';
+        document.getElementById('odistance').innerHTML = '0.0';
+        document.getElementById('rradius').innerHTML = '0.0';
+        document.getElementById('mass').innerHTML = '0.0';
+        document.getElementById("planetImg").src = "img/planets/unknown.png";
+    }
 
+    //console.log(bodyObjects[id]);
     if (lastTime != 0) {
         document.getElementById("follow").onclick = function() {
             follow = !follow;
@@ -196,6 +217,7 @@ function initWebGL(CANVAS) {
     zoom = -100;
     orbitX = 0.2;
     orbitY = 0.5;
+    drawDist = 400;
 }
 
 /*========================= RUN WEBGL ========================= */

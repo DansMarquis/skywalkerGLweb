@@ -199,26 +199,19 @@
 								</tr>
 							</table>
 
-							<br><br>
-                            <p style="color:white; display:inline">Time:</p>
-                            <input type="number" id="time-scale" style="width:5em" value="50">
-                            (
-                            <button class="btn" id="minus-time" onclick="slower()">-</button>
-                            <button class="btn" id="plus-time" onclick="faster()">+</button>
-                            )
                             <br><br>
                             <p style="color:white; display:inline">Cam Depth:</p>
-                            <input type="number" id="cam-depth" style="width:5em" value="100">
+                            <input type="number" id="cam-depth" style="width:5em" value="5">
                             (
                             <button class="btn" id="minus-cam" onclick="zoomIn()">-</button>
                             <button class="btn" id="plus-cam" onclick="zoomOut()">+</button>
                             )
-                            <br><br>
+                            <br>
                             <p style="color:white; display:inline">Draw Dist:</p>
-                            <input type="number" id="draw-dist" style="width:5em" value="1000">
+                            <input type="number" id="draw-dist" style="width:5em" value="25">
                             (
-                            <button class="btn" id="minus-dist">-</button>
-                            <button class="btn" id="plus-dist">+</button>
+                            <button class="btn" id="minus-dist" onclick="minusDraw()">-</button>
+                            <button class="btn" id="plus-dist" onclick="plusDraw()">+</button>
                             )
 
                         </center>
@@ -232,7 +225,7 @@
                             <input type="text" id="name" style="width:5em" value="Pandora">
                             <br><br>
                             <p style="color:white; display:inline">Distance:</p>
-                            <input type="number" id="distance" style="width:5em" value="32">
+                            <input type="number" id="distance" style="width:5em" value="142">
                             <br><br>
                             <p style="color:white; display:inline">Translation Velocity:</p>
                             <input type="number" id="translation" style="width:5em" value="0.01">
@@ -262,55 +255,41 @@
                     </div>
                     <br>
                 </div>
-            </div>
 
-            <!--<div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1"> <div
-            class="u-layout"> <div class="u-layout-row" > <div class="u-container-style
-            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup" onclick="sunClick">
-            <div class="u-container-layout u-container-layout-4"> <img
-            src="img/planets/sun.png" alt="" class="u-image u-image-default
-            u-preserve-proportions u-image-1" data-image-width="200"
-            data-image-height="200"> </div> </div> <div class="u-container-style
-            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup"
-            onclick="mercuryClick"> <div class="u-container-layout u-container-layout-4">
-            <img src="img/planets/mercury.png" alt="" class="u-image u-image-default
-            u-preserve-proportions u-image-1" data-image-width="200"
-            data-image-height="200"> </div> </div> <div class="u-container-style
-            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup"
-            onclick="vennusClick"> <div class="u-container-layout u-container-layout-4">
-            <img src="img/planets/venus.png" alt="" class="u-image u-image-default
-            u-preserve-proportions u-image-1" data-image-width="200"
-            data-image-height="200"> </div> </div> <div class="u-container-style
-            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup" onclick="earthClick">
-            <div class="u-container-layout u-container-layout-4"> <img
-            src="img/planets/earth.png" alt="" class="u-image u-image-default
-            u-preserve-proportions u-image-1" data-image-width="200"
-            data-image-height="200"> </div> </div> <div class="u-container-style
-            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup" onclick="marsClick">
-            <div class="u-container-layout u-container-layout-4"> <img
-            src="img/planets/mars.png" alt="" class="u-image u-image-default
-            u-preserve-proportions u-image-1" data-image-width="200"
-            data-image-height="200"> </div> </div> <div class="u-container-style
-            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup"
-            onclick="jupiterClick"> <div class="u-container-layout u-container-layout-4">
-            <img src="img/planets/jupiter.png" alt="" class="u-image u-image-default
-            u-preserve-proportions u-image-1" data-image-width="200"
-            data-image-height="200"> </div> </div> <div class="u-container-style
-            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup"
-            onclick="saturnClick"> <div class="u-container-layout u-container-layout-4">
-            <img src="img/planets/saturn.png" alt="" class="u-image u-image-default
-            u-preserve-proportions u-image-1" data-image-width="200"
-            data-image-height="200"> </div> </div> <div class="u-container-style
-            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup"
-            onclick="uranusClick"> <div class="u-container-layout u-container-layout-4">
-            <img src="img/planets/uranus.png" alt="" class="u-image u-image-default
-            u-preserve-proportions u-image-1" data-image-width="200"
-            data-image-height="200"> </div> </div> <div class="u-container-style
-            u-layout-cell u-size-6 u-size-30-md u-layout-cell-4 popup"
-            onclick="neptuneClick"> <div class="u-container-layout u-container-layout-4">
-            <img src="img/planets/neptune.png" alt="" class="u-image u-image-default
-            u-preserve-proportions u-image-1" data-image-width="200"
-            data-image-height="200"> </div> </div> </div> </div> </div>-->
+                <!-- PLANET INFO -->
+                <div
+                style="height: 300px; text-align: center; background-color: rgba(0, 0, 0, 0.75); border-radius:50px;">
+                <div style="height: 100%; overflow: auto;">
+                <img src="img/planets/unknown.png" alt="planetImg" style="width:100px" id="planetImg">
+                <br>
+                <span style="color:white; font-weight:bold" id="planetName">Unknown</span>
+                <br><br>
+                <span style="color:white; font-weight:bold">Translation Period</span>
+                <br>
+                <span style="color:#95eaf9;" id="tspeed">0.0</span>
+                <br><br>
+                <span style="color:white; font-weight:bold">Rotation Period</span>
+                <br>
+                <span style="color:#95eaf9;" id="rspeed">0.0</span>
+                <br><br>
+                <span style="color:white; font-weight:bold">Orbit Distance (Million km)</span>
+                <br>
+                <span style="color:#95eaf9;" id="odistance">0.0</span>
+                <br><br>
+                <span style="color:white; font-weight:bold">Diameter (km)</span>
+                <br>
+                <span style="color:#95eaf9;" id="rradius">0.0</span>
+                <br><br>
+                <span style="color:white; font-weight:bold">Mass (Earth = 1)</span>
+                <br>
+                <span style="color:#95eaf9;" id="mass">0.0</span>
+                <br><br>
+                </div>
+                
+            </div>
+            </div>
+            
+
 
         </body>
     </html>
