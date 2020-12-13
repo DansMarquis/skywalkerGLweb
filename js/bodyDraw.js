@@ -54,11 +54,11 @@ function Body(distance, translation, rotation, radius, stoppable) {
             this.rotTranslation += this.translation;
         }
         MATHS.rotateY(MATRIX_TRA, this.rotTranslation); // Rotate over your reference body
-        this.stack.add(MATRIX_TRA); // Add to translation stack
+        this.stack.add(MATRIX_TRA); // Add translation matrix to stack
 
         // Distance
         MATHS.translateZ(MATRIX_DIS, this.distance); // Moves to its orbiting position (distance)
-        this.stack.add(MATRIX_DIS); // Add to distance stack
+        this.stack.add(MATRIX_DIS); // Add distance matrix to stack
 
         // Satellites
         for (var i = 0; i < this.satelites.length; i++) {
@@ -68,7 +68,7 @@ function Body(distance, translation, rotation, radius, stoppable) {
         // Rotation
         this.rotRotation += this.rotation; // Increase the angle of rotation on itself
         MATHS.rotateY(MATRIX_ROT, this.rotRotation); // Rotation on itself
-        this.stack.add(MATRIX_ROT); // Add to rotation stack
+        this.stack.add(MATRIX_ROT); // Add rotation matrix to stack
 
         var MATRIX = this.stack.evaluate(); // The value of the matrix is the stack evaluation
 
