@@ -3,7 +3,7 @@
     - Daniel Marques 85070
     - Tomás Freitas  84957
 
-Here we use Column-Makor Notation:
+Here we use Column-Major Notation:
         |    0        4        8        12   |
         |                                    |
         |    1        5        9        13   |

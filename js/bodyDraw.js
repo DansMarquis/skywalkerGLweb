@@ -70,7 +70,7 @@ function Body(distance, translation, rotation, radius, stoppable) {
         MATHS.rotateY(MATRIX_ROT, this.rotRotation); // Rotation on itself
         this.stack.add(MATRIX_ROT); // Add rotation matrix to stack
 
-        var MATRIX = this.stack.evaluate(); // The value of the matrix is the stack evaluation
+        var MATRIX = this.stack.evaluate(); // The value of the matrix is the stack evaluation  (multiplication)
 
         GL.uniformMatrix4fv(SHADERS._Mmatrix, false, MATRIX); // Model matrix is ​​assigned
 
