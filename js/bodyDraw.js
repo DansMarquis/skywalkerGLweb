@@ -24,9 +24,8 @@ function Body(distance, translation, rotation, radius, stoppable) {
     };
 
     this.model = function(GL, radius, textureURL) {
-
-        this.vertex = SPHERE.getSphereVertex(radius, 32); // vertex array
-        this.faces = SPHERE.getShereFaces(32); // Faces array
+        this.vertex = SPHERE.getSphereVertex(radius, subDivisions); // vertex array
+        this.faces = SPHERE.getShereFaces(subDivisions); // Faces array
 
         this.VERTEX = GL.createBuffer(); // Vertex Buffer Object of vertex
         GL.bindBuffer(GL.ARRAY_BUFFER, this.VERTEX); // Vertex bind

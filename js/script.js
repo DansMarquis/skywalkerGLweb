@@ -22,6 +22,7 @@ var pause = false;
 var follow = false;
 var perspective3D = true;
 var wireframe = null;
+var subDivisions = null;
 // JSON PArsed
 var bodies = null;
 // Planet selection list
@@ -251,6 +252,7 @@ function runWebGL() {
     xxL = 0;
     yyL = 0;
     zzL = 1.5;
+    subDivisions = 32;
 
     SHADERS.initialize(GL);
 

@@ -13,8 +13,8 @@ var SPHERE = {
                 beta = j * 2 * Math.PI / res; // Longitude angle
                 // x, y and z calculation for vertex and normals
                 x = Math.cos(beta) * Math.sin(alpha);
-                y = Math.cos(alpha);
-                z = Math.sin(beta) * Math.sin(alpha);
+                y = Math.cos(alpha); // invert from z
+                z = Math.sin(beta) * Math.sin(alpha); // invert from y
                 // u and v calculation for texture coordinates
                 u = 1 - (j / res);
                 v = 1 - (i / res);
@@ -42,11 +42,11 @@ var SPHERE = {
                 // Calculation of the upper and lower left corners
                 first = (i * (res + 1)) + j;
                 second = first + res + 1;
-                // Even Face
+                // Top Triangle
                 indexData.push(first); // Upper left corner
                 indexData.push(second); // Lower left corner
                 indexData.push(first + 1); // Upper right corner
-                // Odd Face
+                // Bottom Triangle
                 indexData.push(second); // Lower left corner
                 indexData.push(second + 1); // Lower right corner
                 indexData.push(first + 1); // Upper right corner

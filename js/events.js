@@ -23,7 +23,6 @@ function setEventListeners() {
             bodyNames.splice(id, 1);
             bodyObjects.splice(id, 1);
         }
-        console.log(bodyObjects);
         // Update last index
         lastIndex = lastIndex - 1;
 
@@ -65,7 +64,13 @@ function setEventListeners() {
     var xSlider = document.getElementById('xx');
     var ySlider = document.getElementById('yy');
     var zSlider = document.getElementById('zz');
-    // RGB
+    var subSlider = document.getElementById('subdivisions');
+
+    // Sphere Subdivisions
+    subSlider.onchange = function() {
+            resetCanvas();
+        }
+        // RGB
     redSlider.onchange = function() {
         redL = redSlider.value;
         updateShader();
@@ -95,9 +100,7 @@ function setEventListeners() {
 
     // Load JSON Button
     document.getElementById("file").onchange = function() {
-        console.log(this.files[0])
         var file = this.files[0];
-        console.log(file)
         var reader = new FileReader();
 
         reader.onload = function(progressEvent) {
@@ -229,6 +232,34 @@ function resetCanvas() {
     orbitX = 0.2;
     orbitY = 0.5;
     drawDist = 400;
+    redL = 0.8;
+    greenL = 0.8;
+    blueL = 0.8;
+    xxL = 0;
+    yyL = 0;
+    zzL = 1.5;
+    var subSlider = document.getElementById('subdivisions');
+    subDivisions = parseInt(subSlider.value);
+
+    // Reset Variables
+    var theSelect = document.getElementById('bodies');
+    var options = theSelect.getElementsByTagName('option');
+    for (var i = 0; i < options.length; i++) {
+        theSelect.removeChild(options[i]);
+        i--;
+    }
+
+    bodies = null;
+    bodyModels = [];
+    bodyObjects = [];
+    bodyNames = [];
+    bodyInfo = [];
+    lastIndex = null;
+
+    bodies = JSON.parse(data);
+    console.log(bodies);
+    bodies[0].forEach(initPlanets); // Planets and Stars
+    bodies[1].forEach(initMoons);
     bodyModels.forEach(drawModels);
 
     function drawModels(body, index) {
