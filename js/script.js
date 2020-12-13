@@ -222,17 +222,7 @@ function initWebGL(CANVAS) {
         alert("You browser does not support WebGL!");
         return false;
     }
-    // Init First View zoom and angles
-    zoom = -100;
-    orbitX = 0.2;
-    orbitY = 0.5;
-    redL = 0.8;
-    greenL = 0.8;
-    blueL = 0.8;
-    xxL = 0;
-    yyL = 0;
-    zzL = 1.5;
-    drawDist = 400;
+
 }
 
 /*========================= RUN WEBGL ========================= */
@@ -245,7 +235,12 @@ function runWebGL() {
     initWebGL(CANVAS);
 
     GL.viewport(0.0, 0.0, CANVAS.width, CANVAS.height); // Sets the drawing area
-    // Light Source values init
+
+    // Init Variables
+    zoom = -100;
+    orbitX = 0.2;
+    orbitY = 0.5;
+    drawDist = 400;
     redL = 0.8;
     greenL = 0.8;
     blueL = 0.8;
