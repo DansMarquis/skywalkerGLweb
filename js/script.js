@@ -23,6 +23,7 @@ var follow = false;
 var perspective3D = true;
 var mode = null;
 var subDivisions = null;
+var time = null;
 // JSON PArsed
 var bodies = null;
 // Planet selection list
@@ -198,7 +199,7 @@ function animate() {
             moveX = 0;
             moveY = 0;
             zoom = -bodyModels[id].distance - bodyModels[id].radius - (bodyModels[id].radius); // Zoom planet
-            orbitY -= bodyModels[id].translation; // Anulation of translation velocity
+            orbitY -= bodyModels[id].translation * time; // Anulation of translation velocity
         }
     }
     lastTime = timeNow;
@@ -248,6 +249,7 @@ function runWebGL() {
     yyL = 0;
     zzL = 1.5;
     subDivisions = 32;
+    time = 1;
     modeFunc();
 
     SHADERS.initialize(GL);

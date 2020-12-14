@@ -50,7 +50,7 @@ function Body(distance, translation, rotation, radius, stoppable) {
 
         // Translation
         if (!this.stoppable || !pause) {
-            this.rotTranslation += this.translation;
+            this.rotTranslation += this.translation * time;
         }
         MATHS.rotateY(MATRIX_TRA, this.rotTranslation); // Rotate over your reference body
         this.stack.add(MATRIX_TRA); // Add translation matrix to stack

@@ -249,6 +249,7 @@ function resetCanvas() {
     xxL = 0;
     yyL = 0;
     zzL = 1.5;
+    time = 1;
     var subSlider = document.getElementById('subdivisions');
     subDivisions = parseInt(subSlider.value);
     document.getElementById("subN").innerHTML = subDivisions;
@@ -316,6 +317,24 @@ function minusDraw() {
 
     var val = parseInt(document.getElementById("draw-dist").value);
     drawDist -= val;
+}
+
+// Slow Time
+function slowTime() {
+    if (time != 1) {
+        time -= 1;
+        console.log(time);
+        document.getElementById("timeSpeed").innerHTML = time;
+    }
+}
+
+// Speed Time
+function speedTime() {
+    if (time >= 1) {
+        time += 1;
+        console.log(time);
+        document.getElementById("timeSpeed").innerHTML = time;
+    }
 }
 
 // Draw Dist - Plus Draw Distance
