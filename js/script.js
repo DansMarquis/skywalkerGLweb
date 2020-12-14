@@ -4,7 +4,7 @@
     - Tomás Freitas  84957
 */
 // Context
-var gl = null;
+var GL = null;
 var CANVAS = null;
 // Matrices
 var PROJMATRIX = null;
@@ -21,7 +21,7 @@ var drawDist = null;
 var pause = false;
 var follow = false;
 var perspective3D = true;
-var wireframe = null;
+var mode = null;
 var subDivisions = null;
 // JSON PArsed
 var bodies = null;
@@ -248,10 +248,11 @@ function runWebGL() {
     yyL = 0;
     zzL = 1.5;
     subDivisions = 32;
+    modeFunc();
 
     SHADERS.initialize(GL);
 
-    wireframe = GL.TRIANGLES;
+    mode = GL.TRIANGLES;
 
     initBodies();
     setEventListeners();

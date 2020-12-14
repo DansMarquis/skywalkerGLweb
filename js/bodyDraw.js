@@ -23,13 +23,13 @@ function Body(distance, translation, rotation, radius, stoppable) {
         this.satelites.push(satelite);
     };
 
-    this.model = function(GL, radius, textureURL) {
+    this.model = function(gl, radius, textureURL) {
         this.vertex = SPHERE.getSphereVertex(radius, subDivisions); // vertex array
         this.faces = SPHERE.getShereFaces(subDivisions); // Faces array
 
-        this.VERTEX = GL.createBuffer(); // Vertex Buffer Object of vertex
-        GL.bindBuffer(GL.ARRAY_BUFFER, this.VERTEX); // Vertex bind
-        GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(this.vertex), GL.STATIC_DRAW); // Values assign
+        this.VERTEX = gl.createBuffer(); // Vertex Buffer Object of vertex
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.VERTEX); // Vertex bind
+        gl.bufferData(GL.ARRAY_BUFFER, new Float32Array(this.vertex), GL.STATIC_DRAW); // Values assign
 
         this.FACES = GL.createBuffer(); // Vertex Buffer Object of faces
         GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, this.FACES); // Faces bind
@@ -79,11 +79,11 @@ function Body(distance, translation, rotation, radius, stoppable) {
         }
 
         GL.bindBuffer(GL.ARRAY_BUFFER, this.VERTEX); // Vertex are binded
-        GL.vertexAttribPointer(SHADERS._position, 3, GL.FLOAT, false, 4 * (3 + 3 + 2), 0); // Vertex pointer
+        GL.vertexAttribPointer(SHADERS._coordinates, 3, GL.FLOAT, false, 4 * (3 + 3 + 2), 0); // Vertex pointer
         GL.vertexAttribPointer(SHADERS._normal, 3, GL.FLOAT, false, 4 * (3 + 3 + 2), 3 * 4); // Normals pointer
         GL.vertexAttribPointer(SHADERS._uv, 2, GL.FLOAT, false, 4 * (3 + 3 + 2), (3 + 3) * 4); // Texture coordinates (u,v) pointer
 
         GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, this.FACES); // Faces are binded
-        GL.drawElements(wireframe, this.faces.length, GL.UNSIGNED_SHORT, 0); // 6 faces * 2 triangles/face * 3 points/triangle
+        GL.drawElements(mode, this.faces.length, GL.UNSIGNED_SHORT, 0); // 6 faces * 2 triangles/face * 3 points/triangle
     };
 };

@@ -31,6 +31,7 @@ function setEventListeners() {
         x.remove(x.selectedIndex);
     }
 
+
     // Add Planet
     document.getElementById("add").onclick = function() {
 
@@ -240,6 +241,7 @@ function resetCanvas() {
     zzL = 1.5;
     var subSlider = document.getElementById('subdivisions');
     subDivisions = parseInt(subSlider.value);
+    document.getElementById("subN").innerHTML = subDivisions;
 
     // Reset Variables
     var theSelect = document.getElementById('bodies');
@@ -284,19 +286,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-// LINE LOOP / TRIANGLES draw switch
-document.addEventListener('DOMContentLoaded', function() {
-    var checkbox = document.getElementById("wireframe");
-
-    checkbox.addEventListener('change', function() {
-        if (checkbox.checked) {
-            wireframe = GL.TRIANGLES;
-        } else {
-            wireframe = GL.LINE_LOOP;
-        }
-    });
-});
-
 
 // Cam Depth - Zoom In
 function zoomIn() {
@@ -329,6 +318,24 @@ function plusDraw() {
 // Update Shader
 function updateShader() {
     SHADERS.initialize(GL);
+}
+
+// Update Shader
+function modeFunc() {
+    var x = document.getElementById("mode").value;
+    switch (x) {
+        case 'wireframe':
+            mode = GL.LINE_LOOP;
+            break;
+        case 'points':
+            mode = GL.POINTS;
+            break;
+        case 'triangles':
+            mode = GL.TRIANGLES;
+            break;
+        default:
+            mode = GL.TRIANGLES;
+    }
 }
 
 // Load File

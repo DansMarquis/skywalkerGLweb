@@ -27,6 +27,7 @@ var SHADERS = {
             varying vec3 vView;\n\
             void main(void) { //pre-built function\n\
             gl_Position = Pmatrix*Vmatrix*Mmatrix*vec4(position, 1.);\n\
+            gl_PointSize = 2.0;\n\
             vNormal=vec3(Mmatrix*vec4(normal, 0.));\n\
             vView=vec3(Vmatrix*Mmatrix*vec4(position, 1.));\n\
             vUV=uv;\n\
