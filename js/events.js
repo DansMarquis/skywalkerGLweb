@@ -35,7 +35,17 @@ function setEventListeners() {
     // Add Planet
     document.getElementById("add").onclick = function() {
 
-        resetCanvas();
+        //resetCanvas();
+        zoom = -100;
+        orbitX = 0.2;
+        orbitY = 0.5;
+        drawDist = 400;
+        redL = 0.8;
+        greenL = 0.8;
+        blueL = 0.8;
+        xxL = 0;
+        yyL = 0;
+        zzL = 1.5;
         // Get values from inputs
         var name = document.getElementById("name").value;
         var distance = document.getElementById("distance").value;
