@@ -65,7 +65,10 @@ function Body(distance, translation, rotation, radius, stoppable) {
         }
 
         // Rotation
-        this.rotRotation += this.rotation; // Increase the angle of rotation on itself
+        if (!this.stoppable || !pause) {
+            this.rotRotation += this.rotation; // Increase the angle of rotation on itself
+        }
+
         MATHS.rotateY(MATRIX_ROT, this.rotRotation); // Rotation on itself
         this.stack.add(MATRIX_ROT); // Add rotation matrix to stack
 
